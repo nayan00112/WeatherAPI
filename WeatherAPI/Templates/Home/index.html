@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<title>Weather Api</title>
+
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <div class="container-fluid border-spacing-x-0">
+        <div class="p-3 mb-3 bg-primary text-white">
+            <h1 class="display-6">Weather API</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <form method="post" action=''>
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="cname" class="form-label">City Name</label>
+                <input type="text" class="form-control" id="cname" placeholder="e.g. Gandhinagar" name="cname">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <hr>
+
+    <div class="container">
+
+        {% if is_data_false %}
+        <p>Search Any City</p>
+        {% else %}
+        {% if current %}
+
+        <table class="table">
+            <tr>
+                <td>Location: </td>
+                <td> {{location.name}}, {{location.region}} ,{{location.country}} <br>
+                    {{location.lat}}, {{location.lon}}
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>Time: </td>
+                <td> Obs.: {{current.observation_time}} <i>{{location.timezone_id}}</i>,<br>Current:
+                    {{location.localtime}}</td>
+            </tr>
+            <tr>
+                <td>Temprature: </td>
+                <td> {{current.temperature}} C</td>
+            </tr>
+            <tr>
+                <td>Wind speed: </td>
+                <td> {{current.wind_speed}}</td>
+            </tr>
+            <tr>
+                <td>Wind direction: </td>
+                <td> {{current.wind_dir}}</td>
+            </tr>
+            <tr>
+                <td>Wind degree: </td>
+                <td> {{current.wind_degree}}</td>
+            </tr>
+            <tr>
+                <td>Humidity: </td>
+                <td> {{current.humidity}}</td>
+            </tr>
+            <tr>
+                <td>Pressure: </td>
+                <td> {{current.pressure}}</td>
+            </tr>
+            <tr>
+                <td>UV index: </td>
+                <td> {{current.uv_index}}</td>
+            </tr>
+            <tr>
+                <td>Cloudcover: </td>
+                <td> {{current.cloudcover}}</td>
+            </tr>
+            <tr>
+                <td>Weather Descriptions: </td>
+                <td> {{current.weather_descriptions}}</td>
+            </tr>
+
+            <tr>
+                <td>visibility: </td>
+                <td> {{current.visibility}}</td>
+            </tr>
+
+        </table>
+        {% else %}
+        {% if error %}
+        <p>Not Found. Try Again</p>
+        <!-- <table class="table">
+                    <tr>
+                        <th>Err: </th>
+                    </tr>
+                    <tr>
+                        <td>{{success}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{error.code}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{error.type}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{error.info}}</td>
+                    </tr>
+                </table> -->
+        {% endif %}
+        <!-- err -->
+        {% endif %}
+        <!-- current-->
+        {% endif %}
+        <!-- is data false-->
+    </div>
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+        </ul>
+        <p class="text-center text-muted">© 2022 Nayan Patel<br>Weather Data provided by weatherstack API</p>
+      </footer>
+</body>
+
+</html>
