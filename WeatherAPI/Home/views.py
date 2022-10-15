@@ -6,10 +6,9 @@ def Home(request):
     if request.method == 'POST':
         address = request.POST['cname']
         params = {
-            'access_key': '31959dc57589631d1487a88e13a8d624',
+            'access_key': 'YOUR API',
             'query': address,
         }
-
         # https://weatherstack.com/
         try:
             api_result = requests.get(f'http://api.weatherstack.com/current', params)
