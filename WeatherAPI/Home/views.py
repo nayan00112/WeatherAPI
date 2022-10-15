@@ -7,7 +7,7 @@ def Home(request):
         address = request.POST['cname']
         print(address)
         params = {
-            'access_key': 'APIKEY',
+            'access_key': '31959dc57589631d1487a88e13a8d624',
             'query': address,
         }
 
