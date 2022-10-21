@@ -6,7 +6,7 @@ def Home(request):
     if request.method == 'POST':
         address = request.POST['cname']
         params = {
-            'access_key': 'YOUR API',
+            'access_key': 'YOUR_API_KEY',
             'query': address,
         }
         # https://weatherstack.com/
@@ -16,7 +16,7 @@ def Home(request):
             try:
                 location = api_response['location']
                 current = api_response['current']
-                print(api_response)
+                # print(api_response)
                 objects = {
                     # 'requestAPI' : requestAPI,
                     'location': location,

@@ -7,8 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-</head>
-<title>Weather Api</title>
+
+    <script>
+
+        function printDiv(divname) {
+            var printCont = document.getElementById(divname).innerHTML;
+            var bodyprint = document.body.innerHTML;
+
+            document.body.innerHTML = printCont;
+            window.print();
+            document.body.innerHTML = bodyprint;
+        }
+    </script>
+    <title>Weather Api</title>
 
 </head>
 
@@ -40,87 +51,93 @@
         <p>Search Any City</p>
         {% else %}
         {% if current %}
+        <div id="printme">
+            <table class="table">
+                <tr>
+                    <td>Location: </td>
+                    <td> {{location.name}}, {{location.region}} ,{{location.country}} <br>
+                        {{location.lat}}, {{location.lon}}
+                    </td>
+                </tr>
 
-        <table class="table">
-            <tr>
-                <td>Location: </td>
-                <td> {{location.name}}, {{location.region}} ,{{location.country}} <br>
-                    {{location.lat}}, {{location.lon}}
-                </td>
-            </tr>
 
+                <tr>
+                    <td>Time: </td>
+                    <td> Obs.: {{current.observation_time}} <i>{{location.timezone_id}}</i>,<br>Current:
+                        {{location.localtime}}</td>
+                </tr>
+                <tr>
+                    <td>Temprature: </td>
+                    <td> {{current.temperature}} C</td>
+                </tr>
+                <tr>
+                    <td>Wind speed: </td>
+                    <td> {{current.wind_speed}}</td>
+                </tr>
+                <tr>
+                    <td>Wind direction: </td>
+                    <td> {{current.wind_dir}}</td>
+                </tr>
+                <tr>
+                    <td>Wind degree: </td>
+                    <td> {{current.wind_degree}}</td>
+                </tr>
+                <tr>
+                    <td>Humidity: </td>
+                    <td> {{current.humidity}}</td>
+                </tr>
+                <tr>
+                    <td>Pressure: </td>
+                    <td> {{current.pressure}}</td>
+                </tr>
+                <tr>
+                    <td>UV index: </td>
+                    <td> {{current.uv_index}}</td>
+                </tr>
+                <tr>
+                    <td>Cloudcover: </td>
+                    <td> {{current.cloudcover}}</td>
+                </tr>
+                <tr>
+                    <td>Weather Descriptions: </td>
+                    <td> {{current.weather_descriptions}}</td>
+                </tr>
 
-            <tr>
-                <td>Time: </td>
-                <td> Obs.: {{current.observation_time}} <i>{{location.timezone_id}}</i>,<br>Current:
-                    {{location.localtime}}</td>
-            </tr>
-            <tr>
-                <td>Temprature: </td>
-                <td> {{current.temperature}} C</td>
-            </tr>
-            <tr>
-                <td>Wind speed: </td>
-                <td> {{current.wind_speed}}</td>
-            </tr>
-            <tr>
-                <td>Wind direction: </td>
-                <td> {{current.wind_dir}}</td>
-            </tr>
-            <tr>
-                <td>Wind degree: </td>
-                <td> {{current.wind_degree}}</td>
-            </tr>
-            <tr>
-                <td>Humidity: </td>
-                <td> {{current.humidity}}</td>
-            </tr>
-            <tr>
-                <td>Pressure: </td>
-                <td> {{current.pressure}}</td>
-            </tr>
-            <tr>
-                <td>UV index: </td>
-                <td> {{current.uv_index}}</td>
-            </tr>
-            <tr>
-                <td>Cloudcover: </td>
-                <td> {{current.cloudcover}}</td>
-            </tr>
-            <tr>
-                <td>Weather Descriptions: </td>
-                <td> {{current.weather_descriptions}}</td>
-            </tr>
+                <tr>
+                    <td>visibility: </td>
+                    <td> {{current.visibility}}</td>
+                </tr>
 
-            <tr>
-                <td>visibility: </td>
-                <td> {{current.visibility}}</td>
-            </tr>
-
-        </table>
+            </table>
+        </div>
+        <div>
+            <button onclick="printDiv('printme')" class="btn btn-success" value="Print">Print</button>
+        </div>
         {% else %}
+
+
         {% if error or success %}
         <table class="table">
-                    <tr>
-                        <th>Err: </th>
-                    </tr>
-                    {% if success %}
-                    <tr>
-                        <td>{{success}}</td>
-                    </tr>
-                    {% endif %}
-                    {% if error %}
-                    <tr>
-                        <td>{{error.code}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{error.type}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{error.info}}</td>
-                    </tr>
-                    {% endif %}
-                </table>
+            <tr>
+                <th>Err: </th>
+            </tr>
+            {% if success %}
+            <tr>
+                <td>{{success}}</td>
+            </tr>
+            {% endif %}
+            {% if error %}
+            <tr>
+                <td>{{error.code}}</td>
+            </tr>
+            <tr>
+                <td>{{error.type}}</td>
+            </tr>
+            <tr>
+                <td>{{error.info}}</td>
+            </tr>
+            {% endif %}
+        </table>
         {% endif %}
         <!-- err -->
         {% endif %}
@@ -130,7 +147,7 @@
     </div>
     <footer class="py-3 my-4">
         <p class="text-center text-muted">© 2022 Nayan Patel<br>Weather Data provided by weatherstack API</p>
-      </footer>
+    </footer>
 </body>
 
 </html>
